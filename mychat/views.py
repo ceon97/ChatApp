@@ -1,0 +1,42 @@
+from django.shortcuts import render, redirect
+from mychat.forms import RegisterForm
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib import auth
+from django.contrib.auth import authenticate
+
+
+
+
+
+
+def home(request):
+	return render(request, 'mychat/home.html')
+
+
+def register(request):
+        if request.method=="POST":
+            form = RegisterForm(request.POST)
+
+            if form.is_valid():
+                form.save()
+            return redirect("/")   
+        else:
+            form = RegisterForm()
+    
+        return render(request, "mychat/register.html",{'form':form})
+
+def login(request):    
+        if request.method=="POST":
+            username=request.POST['username']
+            password=request.POST['password']
+            user=authenticate(request,username=username, password=password)
+            if user is not None:
+                return redirect('/')
+            else:
+            	
+            	form=AuthenticationForm()
+
+            	  
+        else:
+        	form=AuthenticationForm()    
+        return render(request, "mychat/login.html",{'form':form})
