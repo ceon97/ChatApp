@@ -31,7 +31,7 @@ def login(request):
             password=request.POST['password']
             user=authenticate(request,username=username, password=password)
             if user is not None:
-                return redirect('/')
+                return redirect('/chat')
             else:
             	
             	form=AuthenticationForm()
@@ -40,3 +40,11 @@ def login(request):
         else:
         	form=AuthenticationForm()    
         return render(request, "mychat/login.html",{'form':form})
+
+def index(request):
+    return render(request, 'mychat/index.html',{})
+
+def room(request, room_name):
+    return render(request, 'mychat/room.html', {
+        'room_name': room_name
+    })
