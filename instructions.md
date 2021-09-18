@@ -3,7 +3,7 @@
 
 
 
-1. Install Python
+## 1. Install Python
 ```bash
 
 
